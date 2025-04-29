@@ -50,5 +50,19 @@ public class PessoaController {
     public Pessoa buscarPorEmail(@PathVariable String email) {
         return pessoaService.buscarPorEmail(email);
     }
+    
+    //Metodo de login 
+    @PostMapping("/login")
+    public Pessoa login(@RequestBody Pessoa loginRequest) {
+    	
+    	//Chamar o serviço para verificar as credenciais
+    	Pessoa pessoa = pessoaService.autenticarPessoa(loginRequest.getEmail(), loginRequest.getSenha());
+    	
+    	if( pessoa != null) {
+    		return pessoa;
+    	} else {
+    		return null;
+    	}
+    }
 
 }
